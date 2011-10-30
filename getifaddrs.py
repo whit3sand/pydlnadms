@@ -8,7 +8,6 @@ from ctypes import (
 import collections
 import ctypes.util
 import ctypes
-import logging
 import pdb
 import sys
 
@@ -92,7 +91,6 @@ def ifap_iter(ifap):
     '''Iterate over linked list of ifaddrs'''
     ifa = ifap.contents
     while True:
-        logging.debug('Yielding interface with name %r', ifa.ifa_name)
         yield ifa
         if not ifa.ifa_next:
             break
@@ -155,6 +153,7 @@ def getifaddrs():
         _freeifaddrs(ifap)
 
 if __name__ == '__main__':
+    import logging
     logging.basicConfig(level=0, stream=sys.stderr)
     import pprint
     pprint.pprint(getifaddrs())
